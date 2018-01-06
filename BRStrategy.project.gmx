@@ -5,9 +5,22 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
-  <backgrounds name="background"/>
+  <sprites name="sprites">
+    <sprite>sprites\spr_soldier_player</sprite>
+  </sprites>
+  <backgrounds name="background">
+    <background>background\bgd_grass</background>
+    <background>background\bgd_water</background>
+    <background>background\bgd_hill</background>
+    <background>background\bgd_city</background>
+  </backgrounds>
   <paths name="paths"/>
+  <objects name="objects">
+    <object>objects\obj_player</object>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\br_world_map</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
