@@ -15,9 +15,21 @@
     <background>background\bgd_city</background>
   </backgrounds>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\is_player_wish_valid.gml</script>
+  </scripts>
+  <fonts name="fonts">
+    <font>fonts\font0</font>
+  </fonts>
   <objects name="objects">
     <object>objects\obj_player</object>
+    <object>objects\obj_dude</object>
+    <object>objects\obj_enemy</object>
+    <object>objects\obj_GUI</object>
   </objects>
+  <timelines name="timelines">
+    <timeline>timelines\tl_next_turn</timeline>
+  </timelines>
   <rooms name="rooms">
     <room>rooms\br_world_map</room>
   </rooms>
