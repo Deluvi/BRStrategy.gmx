@@ -57,7 +57,7 @@ btn_loot_width = 50
 btn_loot_height = 50
 btn_loot_x = view_wport[0] - btn_end_turn_width - btn_loot_height - 10 - 10
 btn_loot_y = view_hport[0] - btn_loot_height - 10
-btn_loot_visible = true
+btn_loot_visible = false
 </string>
           </argument>
         </arguments>
@@ -84,7 +84,7 @@ btn_attack_width = 75
 btn_attack_height = 50
 btn_attack_x = view_wport[0] - btn_end_turn_width - btn_loot_width - btn_attack_width - 10 - 10 - 10
 btn_attack_y = view_hport[0] - btn_attack_height - 10
-btn_attack_visible = true
+btn_attack_visible = false
 </string>
           </argument>
         </arguments>
