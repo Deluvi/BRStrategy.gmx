@@ -29,11 +29,20 @@
 
 move_snap(32,32)
 
+mov = 2
+atk = 2
+hp = 5
+range = 2
+level = 0
+
+set_stat_level(0)
+
 cell_x = floor(x/32)
 cell_y = floor(y/32)
 
 wish_cell_x = cell_x
 wish_cell_y = cell_y
+wish_action = "None"
 </string>
           </argument>
         </arguments>
@@ -61,6 +70,7 @@ if mouse_check_button(mb_right) {
     wish_cell_x = floor(mouse_x/global.tile_width)
     wish_cell_y = floor(mouse_y/global.tile_width)
     move_snap(global.tile_width,global.tile_width)
+    wish_action = "Move"
 }
 </string>
           </argument>
@@ -84,13 +94,29 @@ if mouse_check_button(mb_right) {
             <kind>1</kind>
             <string>///Code to apply the turn
 if global.player_turn {
-    if (is_player_wish_valid()) {
+    if is_player_wish_valid() and wish_action == "Move" {
         cell_x = wish_cell_x
         cell_y = wish_cell_y
         x = cell_x * 32
         y = cell_y * 32
-        global.player_turn = false
     }
+    else if wish_action == "Loot" {
+        if level &lt; 8 {
+            set_stat_level(level+1)
+        }
+        else {
+            atk = atk + 1
+            hp = hp + 2
+        }
+    }
+    else if wish_action == "Attack" {
+        with(obj_enemy) {
+            hp = hp - other.atk
+            //Play attack sound
+        }
+    }
+    wish_action = "None"
+    global.player_turn = false
 }
 </string>
           </argument>
@@ -130,9 +156,14 @@ if global.player_turn {
             <kind>1</kind>
             <string>///Draw the wish of the player
 
-if (wish_cell_x != cell_x or wish_cell_y != cell_y) {
+if (wish_cell_x != cell_x or wish_cell_y != cell_y) and wish_action == "Move" {
     var tile_width = global.tile_width
-    draw_set_colour(c_white)
+    if (is_player_wish_valid(mov)) {
+        draw_set_colour(c_white)
+    }
+    else {
+        draw_set_colour(c_red)
+    }
     draw_rectangle(wish_cell_x * tile_width, wish_cell_y * tile_width,(wish_cell_x + 1) * tile_width, (wish_cell_y + 1) * tile_width, true)
 }
 </string>

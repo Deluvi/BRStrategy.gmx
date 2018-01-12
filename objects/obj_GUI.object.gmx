@@ -37,6 +37,60 @@ btn_end_turn_y = view_hport[0] - btn_end_turn_height - 10
       </action>
       <action>
         <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Initialize loot button
+
+btn_loot_width = 50
+btn_loot_height = 50
+btn_loot_x = view_wport[0] - btn_end_turn_width - btn_loot_height - 10 - 10
+btn_loot_y = view_hport[0] - btn_loot_height - 10
+btn_loot_visible = true
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Initialize attack button
+
+btn_attack_width = 75
+btn_attack_height = 50
+btn_attack_x = view_wport[0] - btn_end_turn_width - btn_loot_width - btn_attack_width - 10 - 10 - 10
+btn_attack_y = view_hport[0] - btn_attack_height - 10
+btn_attack_visible = true
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
         <id>305</id>
         <kind>0</kind>
         <userelative>0</userelative>
@@ -96,8 +150,10 @@ if mouse_check_button(mb_left) {
     var my2 = mouse_y*2
     
     if point_in_rectangle(window_mouse_get_x(),window_mouse_get_y(),btn_end_turn_x, btn_end_turn_y, btn_end_turn_x2, btn_end_turn_y2) {
-        if !timeline_running {
-            timeline_running = true;
+        if is_player_wish_valid() {
+            if !timeline_running {
+                timeline_running = true;
+            }
         }
     }
 }
@@ -105,8 +161,6 @@ if mouse_check_button(mb_left) {
           </argument>
         </arguments>
       </action>
-    </event>
-    <event eventtype="6" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -123,13 +177,56 @@ if mouse_check_button(mb_left) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Check if the end of turn button has been clicked
-var btn_end_turn_x2 = btn_end_turn_x + btn_end_turn_width
-var btn_end_turn_y2 = btn_end_turn_y + btn_end_turn_height
+            <string>///Check if the loot button has been clicked
+if mouse_check_button(mb_left) {
 
-if point_in_rectangle(mouse_x,mouse_y,btn_end_turn_x, btn_end_turn_y, btn_end_turn_x2, btn_end_turn_y2) {
-    if !timeline_running {
-        timeline_running = true;
+    var btn_loot_x2 = btn_loot_x + btn_loot_width
+    var btn_loot_y2 = btn_loot_y + btn_loot_height
+    var mx = mouse_x
+    var my = mouse_y
+    var mx2 = mouse_x*2
+    var my2 = mouse_y*2
+    
+    if btn_loot_visible and point_in_rectangle(window_mouse_get_x(),window_mouse_get_y(),btn_loot_x, btn_loot_y, btn_loot_x2, btn_loot_y2) {
+        with instance_find(obj_player,0) {
+            wish_action = "Loot"
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check if the attack button has been clicked
+if mouse_check_button(mb_left) {
+
+    var btn_attack_x2 = btn_attack_x + btn_attack_width
+    var btn_attack_y2 = btn_attack_y + btn_attack_height
+    var mx = mouse_x
+    var my = mouse_y
+    var mx2 = mouse_x*2
+    var my2 = mouse_y*2
+    
+    if btn_attack_visible and point_in_rectangle(window_mouse_get_x(),window_mouse_get_y(),btn_attack_x, btn_attack_y, btn_attack_x2, btn_attack_y2) {
+        with instance_find(obj_player,0) {
+            wish_action = "Attack"
+        }
     }
 }
 </string>
@@ -160,9 +257,102 @@ var btn_end_turn_y2 = btn_end_turn_y + btn_end_turn_height
 
 draw_set_color(c_gray)
 draw_rectangle(btn_end_turn_x, btn_end_turn_y, btn_end_turn_x2, btn_end_turn_y2,false)
-draw_set_font(font0)
+draw_set_font(fnt_standard)
 draw_set_color(c_white)
-draw_text(btn_end_turn_x + 10, btn_end_turn_y + 10, "End of turn")
+draw_text(btn_end_turn_x + 10, btn_end_turn_y + 15, "End of turn")
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw loot button
+
+if btn_loot_visible {
+    var btn_loot_x2 = btn_loot_x + btn_loot_width
+    var btn_loot_y2 = btn_loot_y + btn_loot_height
+    
+    draw_set_color(c_yellow)
+    draw_rectangle(btn_loot_x, btn_loot_y, btn_loot_x2, btn_loot_y2,false)
+    draw_set_font(fnt_standard)
+    draw_set_color(c_white)
+    draw_text(btn_loot_x + 5, btn_loot_y + 15, "Loot")
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw attack button
+
+if btn_attack_visible {
+    var btn_attack_x2 = btn_attack_x + btn_attack_width
+    var btn_attack_y2 = btn_attack_y + btn_attack_height
+    
+    draw_set_color(c_red)
+    draw_rectangle(btn_attack_x, btn_attack_y, btn_attack_x2, btn_attack_y2,false)
+    draw_set_font(fnt_standard)
+    draw_set_color(c_white)
+    draw_text(btn_attack_x + 5, btn_attack_y + 15, "Attack")
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw player wish
+
+var player = instance_find(obj_player,0)
+
+if player.wish_action != "None" {
+    draw_set_color(c_grey)
+    draw_text(btn_end_turn_x + 10, btn_end_turn_y - 25, player.wish_action)
+
+}
 </string>
           </argument>
         </arguments>

@@ -47,6 +47,8 @@ global.player_turn = true
           <argument>
             <kind>1</kind>
             <string>///Trigger ennemies actions
+
+global.enemy_turn = true
 </string>
           </argument>
         </arguments>

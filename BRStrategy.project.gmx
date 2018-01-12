@@ -7,6 +7,7 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_soldier_player</sprite>
+    <sprite>sprites\spr_soldier_enemy</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bgd_grass</background>
@@ -16,10 +17,15 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\is_player_wish_valid.gml</script>
+    <scripts name="player_movements">
+      <script>scripts\is_player_wish_valid.gml</script>
+      <script>scripts\is_tile_walkable.gml</script>
+    </scripts>
+    <script>scripts\spawn_enemy_level.gml</script>
+    <script>scripts\set_stat_level.gml</script>
   </scripts>
   <fonts name="fonts">
-    <font>fonts\font0</font>
+    <font>fonts\fnt_standard</font>
   </fonts>
   <objects name="objects">
     <object>objects\obj_player</object>
