@@ -28,7 +28,7 @@
             <string>///Initialize variables
 
 move_snap(32,32)
-
+image_speed = 0
 mov = 2
 atk = 2
 hp = 5

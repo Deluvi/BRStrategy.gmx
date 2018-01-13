@@ -1,5 +1,5 @@
 ///set_stat_level(level)
-
+image_index = argument0
 switch argument0 {
     case 0:
         mov = 2
@@ -27,7 +27,7 @@ switch argument0 {
         break;
     case 4:
         mov = 2
-        atk = 4
+        atk = 6
         hp = 18
         range = 2
         break;
@@ -60,6 +60,7 @@ switch argument0 {
         atk = 800
         hp = 1
         range = 1000
+        image_index = 8
         break;
 }
 level = argument0
