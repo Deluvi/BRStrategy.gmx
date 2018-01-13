@@ -349,7 +349,7 @@ if btn_attack_visible {
 var player = instance_find(obj_player,0)
 
 if player.wish_action != "None" {
-    draw_set_color(c_grey)
+    draw_set_color(c_black)
     draw_text(btn_end_turn_x + 10, btn_end_turn_y - 25, player.wish_action)
 
 }
@@ -383,6 +383,32 @@ draw_set_color(c_gray)
 draw_rectangle(5,view_hport[0] - 105,105,view_hport[0] - 5,false)
 draw_set_color(c_white)
 draw_text_ext(10,view_hport[0] - 100,text_to_display,20,100)
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw number players remaining
+
+draw_set_color(c_gray)
+draw_rectangle(view_wport[0]-110,10,view_wport[0]-10,50,false)
+draw_set_color(c_white)
+draw_text(view_wport[0]-105,15,string(global.players_remaining) + " alive")
 </string>
           </argument>
         </arguments>

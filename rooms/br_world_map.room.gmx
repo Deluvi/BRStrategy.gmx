@@ -12,7 +12,9 @@
   <showcolour>-1</showcolour>
   <code>global.tile_width = 32
 global.player_turn = false
-global.enemy_turn = false</code>
+global.enemy_turn = false
+global.players_remaining = 30
+randomize()</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -54,7 +56,8 @@ global.enemy_turn = false</code>
   </views>
   <instances>
     <instance objName="obj_player" x="128" y="96" name="inst_E851319D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_GUI" x="96" y="96" name="inst_26EFD80F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_GUI" x="0" y="0" name="inst_26EFD80F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_enemy" x="160" y="224" name="inst_EDC1B728" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="bgd_grass" x="128" y="96" w="32" h="32" xo="0" yo="0" id="10000033" name="inst_2AD0A708" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

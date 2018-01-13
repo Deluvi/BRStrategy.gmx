@@ -28,7 +28,7 @@ global.player_turn = true
     </event>
   </entry>
   <entry>
-    <step>30</step>
+    <step>15</step>
     <event>
       <action>
         <libid>1</libid>
@@ -85,8 +85,113 @@ global.enemy_turn = true
     </event>
   </entry>
   <entry>
-    <step>31</step>
+    <step>16</step>
     <event>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Spawn new enemies
+
+if random(100) &gt; 90 {
+    var player = instance_find(obj_player,0)
+    switch choose(1,2,3,4) {
+        case 1:
+            if is_tile_walkable(player.x + (player.range + 1)*32,player.y) {
+                var new_enemy = instance_create(player.x + (player.range + 1)*32,player.y,obj_enemy)
+                with new_enemy {
+                    move_snap(32,32)
+                    set_stat_level(1)
+                    cell_x = floor(x/32)
+                    cell_y = floor(y/32)
+                }
+            }
+            else if is_tile_walkable(player.x - (player.range + 1)*32,player.y) {
+                var new_enemy = instance_create(player.x - (player.range + 1) *32,player.y,obj_enemy)
+                with new_enemy {
+                    move_snap(32,32)
+                    set_stat_level(1)
+                    cell_x = floor(x/32)
+                    cell_y = floor(y/32)
+                }
+            }
+            break
+        case 2:
+            if is_tile_walkable(player.x,player.y + (player.range + 1)*32) {
+                var new_enemy = instance_create(player.x,player.y + (player.range + 1)*32,obj_enemy)
+                with new_enemy {
+                    move_snap(32,32)
+                    set_stat_level(1)
+                    cell_x = floor(x/32)
+                    cell_y = floor(y/32)
+                }
+            }
+            else if is_tile_walkable(player.x,player.y - (player.range + 1)*32) {
+                var new_enemy = instance_create(player.x,player.y - (player.range + 1)*32,obj_enemy)
+                with new_enemy {
+                    move_snap(32,32)
+                    set_stat_level(1)
+                    cell_x = floor(x/32)
+                    cell_y = floor(y/32)
+                }
+            }
+            break
+        case 3:
+            if is_tile_walkable(player.x + (player.range + 1)*32,player.y) and is_tile_walkable(player.x - (player.range + 1)*32,player.y) {
+                var new_enemy = instance_create(player.x + (player.range + 1)*32,player.y,obj_enemy)
+                with new_enemy {
+                    move_snap(32,32)
+                    set_stat_level(1)
+                    cell_x = floor(x/32)
+                    cell_y = floor(y/32)
+                }
+                
+                new_enemy = instance_create(player.x - (player.range + 1) *32,player.y,obj_enemy)
+                with new_enemy {
+                    move_snap(32,32)
+                    set_stat_level(1)
+                    cell_x = floor(x/32)
+                    cell_y = floor(y/32)
+                }
+            }
+            break
+        case 4:
+            if is_tile_walkable(player.x,player.y + (player.range + 1)*32) and is_tile_walkable(player.x,player.y - (player.range + 1)*32) {
+                var new_enemy = instance_create(player.x,player.y + (player.range + 1)*32,obj_enemy)
+                with new_enemy {
+                    move_snap(32,32)
+                    set_stat_level(1)
+                    cell_x = floor(x/32)
+                    cell_y = floor(y/32)
+                }
+                
+                new_enemy = instance_create(player.x,player.y - (player.range + 1)*32,obj_enemy)
+                with new_enemy {
+                    move_snap(32,32)
+                    set_stat_level(1)
+                    cell_x = floor(x/32)
+                    cell_y = floor(y/32)
+                }
+            }
+            break
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
