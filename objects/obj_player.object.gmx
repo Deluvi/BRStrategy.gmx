@@ -70,7 +70,12 @@ if mouse_check_button(mb_right) {
     wish_cell_x = floor(mouse_x/global.tile_width)
     wish_cell_y = floor(mouse_y/global.tile_width)
     move_snap(global.tile_width,global.tile_width)
-    wish_action = "Move"
+    if wish_cell_x == cell_x and wish_cell_y == cell_y {
+        wish_action = "Wait"
+    }
+    else {
+        wish_action = "Move"
+    }
 }
 </string>
           </argument>
@@ -99,9 +104,9 @@ if global.player_turn {
         cell_y = wish_cell_y
         x = cell_x * 32
         y = cell_y * 32
-        with obj_GUI {
+        /*with obj_GUI {
             btn_loot_visible = tile_get_background(tile_layer_find(1000000,other.cell_x*32,other.cell_y*32)) == bgd_city
-        }
+        }*/
     }
     else if wish_action == "Loot" {
         if level &lt; 8 {

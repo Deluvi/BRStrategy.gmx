@@ -46,26 +46,41 @@ global.player_turn = true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Trigger ennemies actions
+            <string>///Check if any enemy should die
 
-global.enemy_turn = true
+var i;
+for (i = 0; i &lt; instance_number(obj_enemy); i += 1) {
+    var enemy = instance_find(obj_enemy,i);
+    if enemy.hp &lt;= 0 {
+        instance_destroy(enemy)
+    }
+}
 </string>
           </argument>
         </arguments>
       </action>
       <action>
         <libid>1</libid>
-        <id>308</id>
-        <kind>0</kind>
+        <id>603</id>
+        <kind>7</kind>
         <userelative>0</userelative>
         <isquestion>0</isquestion>
         <useapplyto>-1</useapplyto>
-        <exetype>1</exetype>
-        <functionname>action_timeline_stop</functionname>
+        <exetype>2</exetype>
+        <functionname></functionname>
         <codestring></codestring>
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Trigger ennemies actions
+
+global.enemy_turn = true
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
   </entry>
@@ -88,14 +103,63 @@ global.enemy_turn = true
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Check if any enemy is alive
-
+            <string>///Check if any enemy is in range
+global.enemy_turn = false
+var i
+var is_in_range = false
+var player = instance_find(obj_player,0)
+for (i = 0; i &lt; instance_number(obj_enemy); i += 1) {
+    var enemy = instance_find(obj_enemy,i)
+    if abs(player.cell_x - enemy.cell_x) + abs(player.cell_y - enemy.cell_y) &lt;= player.range {
+        is_in_range = true
+    }
+}
 with obj_GUI {
-    btn_attack_visible = instance_exists(obj_enemy)
+    btn_attack_visible = is_in_range
 }
 </string>
           </argument>
         </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check if on loot tile
+var player = instance_find(obj_player,0)
+
+with obj_GUI {
+    btn_loot_visible = tile_get_background(tile_layer_find(1000000,player.cell_x*32,player.cell_y*32)) == bgd_city
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>308</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_timeline_stop</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
       </action>
     </event>
   </entry>

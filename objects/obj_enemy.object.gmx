@@ -67,6 +67,27 @@ wish_action = "None"
 if global.enemy_turn {
     var player = instance_find(obj_player,0)
     if abs(cell_x - player.cell_x) + abs(cell_y - player.cell_y) &gt; range { //If player out of range
+        var remaining_mov = mov
+        var wish_cell_x = cell_x
+        var wish_cell_y = cell_y
+        //Determine wish_cell
+        while remaining_mov &gt; 0 and abs(cell_x - player.cell_x) + abs(cell_y - player.cell_y) &gt;= 2 {
+            if wish_cell_x - player.cell_x &lt; 0 {
+                wish_cell_x = wish_cell_x + 1
+            }
+            else if wish_cell_x - player.cell_x &gt; 0 {
+                wish_cell_x = wish_cell_x - 1
+            }
+            else {
+                if wish_cell_y - player.cell_y &lt; 0 {
+                    wish_cell_y = wish_cell_y + 1
+                }
+                else if wish_cell_y - player.cell_y &gt; 0 {
+                    wish_cell_y = wish_cell_y - 1
+                }
+            }
+            remaining_mov--
+        }
         cell_x = wish_cell_x
         cell_y = wish_cell_y
         x = cell_x * 32
@@ -74,7 +95,7 @@ if global.enemy_turn {
     }
     else {
         with (player) {
-            other.hp = other.hp - atk
+            hp = hp - floor(other.atk/2)
             //Play sound attack
         }
     }
