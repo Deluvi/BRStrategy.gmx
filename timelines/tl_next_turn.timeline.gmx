@@ -105,9 +105,17 @@ global.enemy_turn = true
             <kind>1</kind>
             <string>///Spawn new enemies
 
-if random(100) &gt; 90 {
+if random(100) &gt; -101 {
     var player = instance_find(obj_player,0)
-    switch choose(1,2,3,4) {
+    var remaining_to_spawn = global.players_remaining - instance_number(obj_enemy) - 1
+    var choice = 0
+    if remaining_to_spawn &gt;= 2 {
+        choice = choose(1,2,3,4)        
+    }
+    else if remaining_to_spawn &gt;= 1 {
+        choice = choose(1,2)
+    }
+    switch choice {
         case 1:
             if is_tile_walkable(player.x + (player.range + 1)*32,player.y) {
                 var new_enemy = instance_create(player.x + (player.range + 1)*32,player.y,obj_enemy)
@@ -187,6 +195,7 @@ if random(100) &gt; 90 {
             }
             break
     }
+    default:
 }
 </string>
           </argument>

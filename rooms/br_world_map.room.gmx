@@ -827,6 +827,7 @@ randomize()</code>
     <tile bgName="bgd_city" x="704" y="320" w="32" h="32" xo="0" yo="32" id="10000953" name="inst_F19306CC" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bgd_city" x="640" y="544" w="32" h="32" xo="0" yo="0" id="10000954" name="inst_6103C0FF" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
     <tile bgName="bgd_city" x="160" y="512" w="32" h="32" xo="64" yo="0" id="10000955" name="inst_5003A7A4" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
+    <tile bgName="bgd_water" x="992" y="736" w="32" h="32" xo="0" yo="0" id="10000956" name="inst_E05E07E6" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
   </tiles>
   <PhysicsWorld>0</PhysicsWorld>
   <PhysicsWorldTop>0</PhysicsWorldTop>
