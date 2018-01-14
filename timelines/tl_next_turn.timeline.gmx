@@ -105,7 +105,7 @@ global.enemy_turn = true
             <kind>1</kind>
             <string>///Spawn new enemies
 
-if random(100) &gt; -101 {
+if random(100) &gt; 90 {
     var player = instance_find(obj_player,0)
     var remaining_to_spawn = global.players_remaining - instance_number(obj_enemy) - 1
     var choice = 0
@@ -251,11 +251,11 @@ with obj_GUI {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Check if on loot tile
+            <string>///Check if on valid loot tile
 var player = instance_find(obj_player,0)
 
 with obj_GUI {
-    btn_loot_visible = tile_get_background(tile_layer_find(1000000,player.cell_x*32,player.cell_y*32)) == bgd_city
+    btn_loot_visible = (tile_get_background(tile_layer_find(1000000,player.cell_x*32,player.cell_y*32)) == bgd_city) and !ds_grid_get(looted,player.cell_x,player.cell_y)
 }
 </string>
           </argument>

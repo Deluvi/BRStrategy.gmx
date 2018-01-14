@@ -116,11 +116,20 @@ if global.player_turn {
             atk = atk + 1
             hp = hp + 2
         }
+        with obj_GUI {
+            ds_grid_set(looted,other.cell_x,other.cell_y,true)
+        }
     }
     else if wish_action == "Attack" {
-        with(obj_enemy) {
-            hp = hp - other.atk
-            //Play attack sound
+        //Play attack sound
+        var i;
+        for (i = 0; i &lt; instance_number(obj_enemy); i += 1) {
+            var enemy = instance_find(obj_enemy,i);
+            if abs(cell_x - enemy.cell_x) + abs(cell_y - enemy.cell_y) &lt;= range {
+                with(enemy) {
+                    hp = hp - other.atk                
+                }
+            }
         }
     }
     wish_action = "None"
