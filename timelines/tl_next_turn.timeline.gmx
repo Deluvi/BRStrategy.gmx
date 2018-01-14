@@ -129,14 +129,14 @@ global.blue_zone_turn = true
 
 var remaining_to_spawn = global.players_remaining - instance_number(obj_enemy) - 1
 var to_remove = 0
-if (global.turn_count%2) == 0 {
+if (global.turn_count%3) == 0 {
     if remaining_to_spawn &gt; 20 {
-        to_remove = 3
+        to_remove = choose(1,2,3)
     }
-    if remaining_to_spawn &gt; 10 {
-        to_remove = 2
+    else if remaining_to_spawn &gt; 10 {
+        to_remove = choose(1,2)
     }
-    if remaining_to_spawn &gt; 5 {
+    else if remaining_to_spawn &gt; 5 {
         to_remove = 1
     }
     else to_remove = 0
