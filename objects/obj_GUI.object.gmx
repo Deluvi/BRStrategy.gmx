@@ -495,13 +495,15 @@ draw_text(view_wport[0]-105,15,string(global.players_remaining) + " alive")
             <kind>1</kind>
             <string>///Draw shrinking in X
 
-draw_set_color(c_white)
 if instance_exists(obj_blue_zone) {
+    draw_set_color(c_gray)
+    draw_rectangle(110,view_hport[0] - 30,270,view_hport[0] - 5,false)
+    draw_set_color(c_white)
     if obj_blue_zone.waiting_turn &gt; 0 {
-        draw_text(500,500,"Shrinking in: " + string(obj_blue_zone.waiting_turn))
+        draw_text(115,view_hport[0]-25,"Shrinking in: " + string(obj_blue_zone.waiting_turn))
     }
     else {
-        draw_text(500,500,"Shrinking now!")
+        draw_text(115,view_hport[0]-25,"Shrinking now!")
     }
 }
 </string>
@@ -525,18 +527,19 @@ if instance_exists(obj_blue_zone) {
           <argument>
             <kind>1</kind>
             <string>///Draw according message if win or lose
-if global.win {
-    draw_set_color(c_gray)
-    draw_rectangle(floor(view_wport[0]/2)-35,floor(view_hport[0]/2)-25,floor(view_wport[0]/2)+335,floor(view_hport[0]/2)+25,false)
-    draw_set_color($37cce0)
-    draw_text(floor(view_wport[0]/2)-30,floor(view_hport[0]/2)-20,"Gagnant gagnant poulet repas")
-}
-else if global.lose {
+if global.lose {
     draw_set_color(c_gray)
     draw_rectangle(floor(view_wport[0]/2)-35,floor(view_hport[0]/2)-25,floor(view_wport[0]/2)+335,floor(view_hport[0]/2)+25,false)
     draw_set_color($37cce0)
     draw_text(floor(view_wport[0]/2)-30,floor(view_hport[0]/2)-20,"YOU DED, Press R to try again")
 }
+else if global.win {
+    draw_set_color(c_gray)
+    draw_rectangle(floor(view_wport[0]/2)-35,floor(view_hport[0]/2)-25,floor(view_wport[0]/2)+335,floor(view_hport[0]/2)+25,false)
+    draw_set_color($37cce0)
+    draw_text(floor(view_wport[0]/2)-30,floor(view_hport[0]/2)-20,"Gagnant gagnant poulet repas")
+}
+
 </string>
           </argument>
         </arguments>

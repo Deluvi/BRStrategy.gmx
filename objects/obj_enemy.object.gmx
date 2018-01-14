@@ -145,7 +145,7 @@ if global.enemy_turn {
     }
     else {
         with (player) {
-            hp = hp - floor(other.atk/2)
+            hp = hp - ceil(other.atk/3)
             //Play sound attack
         }
     }

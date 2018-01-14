@@ -34,8 +34,8 @@ switch argument0 {
     case 5:
         mov = 2
         atk = 10
-        hp = 7
-        range = 6
+        hp = 15
+        range = 4
         break;
     case 6:
         mov = 4
