@@ -82,6 +82,28 @@ global.enemy_turn = true
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Trigger blue zone turn
+global.blue_zone_turn = true
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
   </entry>
   <entry>
@@ -195,7 +217,45 @@ if random(100) &gt; 90 {
             }
             break
     }
-    default:
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check blue zone damages
+
+var player = instance_find(obj_player,0)
+
+with player {
+    if !collision_circle(obj_blue_zone.x,obj_blue_zone.y,obj_blue_zone.current_radius,obj_player,false,false) {
+        hp = hp - obj_blue_zone.atk
+    }   
+}
+
+var i
+for (i = 0; i &lt; instance_number(obj_enemy); i += 1) {
+    var enemy = instance_find(obj_enemy,i)
+    with enemy {
+        if collision_circle(obj_blue_zone.x,obj_blue_zone.y,obj_blue_zone.current_radius,noone,false,false) {
+            hp = hp - obj_blue_zone.atk
+        }   
+    }
 }
 </string>
           </argument>

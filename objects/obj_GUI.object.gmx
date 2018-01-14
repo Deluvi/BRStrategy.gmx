@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///Initialize end of turn button
-
+randomize()
 btn_end_turn_width = 150
 btn_end_turn_height = 50
 btn_end_turn_x = view_wport[0] - btn_end_turn_width - 10
@@ -433,6 +433,30 @@ draw_set_color(c_gray)
 draw_rectangle(view_wport[0]-110,10,view_wport[0]-10,50,false)
 draw_set_color(c_white)
 draw_text(view_wport[0]-105,15,string(global.players_remaining) + " alive")
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw shrinking in...
+
+draw_set_color(c_white)
+draw_text(500,500,"Shrinking in: " + string(obj_blue_zone.waiting_turn))
 </string>
           </argument>
         </arguments>

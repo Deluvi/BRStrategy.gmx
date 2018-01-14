@@ -37,6 +37,14 @@ level = 0
 
 set_stat_level(0)
 
+randomize()
+x = 32
+y = 32
+while !is_tile_walkable(x,y) {
+    x = floor(random(room_width-1))
+    y = floor(random(room_height-1))
+    move_snap(32,32)
+}
 cell_x = floor(x/32)
 cell_y = floor(y/32)
 

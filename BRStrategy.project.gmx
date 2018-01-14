@@ -32,6 +32,7 @@
     <object>objects\obj_dude</object>
     <object>objects\obj_enemy</object>
     <object>objects\obj_GUI</object>
+    <object>objects\obj_blue_zone</object>
   </objects>
   <timelines name="timelines">
     <timeline>timelines\tl_next_turn</timeline>
