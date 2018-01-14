@@ -125,12 +125,51 @@ global.blue_zone_turn = true
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Reduce player alive counter
+
+var remaining_to_spawn = global.players_remaining - instance_number(obj_enemy) - 1
+var to_remove = 0
+if (global.turn_count%2) == 0 {
+    if remaining_to_spawn &gt; 20 {
+        to_remove = 3
+    }
+    if remaining_to_spawn &gt; 10 {
+        to_remove = 2
+    }
+    if remaining_to_spawn &gt; 5 {
+        to_remove = 1
+    }
+    else to_remove = 0
+}
+global.players_remaining = global.players_remaining - to_remove
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Spawn new enemies
 
-if random(100) &gt; 90 {
+if (random(100)+(10*obj_blue_zone.shrink_nbr)) &gt; 90 {
     var player = instance_find(obj_player,0)
     var remaining_to_spawn = global.players_remaining - instance_number(obj_enemy) - 1
     var choice = 0
+    var level = 0
+    level = floor((ceil(random(10))+global.turn_count)/10)
     if remaining_to_spawn &gt;= 2 {
         choice = choose(1,2,3,4)        
     }
@@ -143,7 +182,7 @@ if random(100) &gt; 90 {
                 var new_enemy = instance_create(player.x + (player.range + 1)*32,player.y,obj_enemy)
                 with new_enemy {
                     move_snap(32,32)
-                    set_stat_level(1)
+                    set_stat_level(level)
                     cell_x = floor(x/32)
                     cell_y = floor(y/32)
                 }
@@ -152,7 +191,7 @@ if random(100) &gt; 90 {
                 var new_enemy = instance_create(player.x - (player.range + 1) *32,player.y,obj_enemy)
                 with new_enemy {
                     move_snap(32,32)
-                    set_stat_level(1)
+                    set_stat_level(level)
                     cell_x = floor(x/32)
                     cell_y = floor(y/32)
                 }
@@ -163,7 +202,7 @@ if random(100) &gt; 90 {
                 var new_enemy = instance_create(player.x,player.y + (player.range + 1)*32,obj_enemy)
                 with new_enemy {
                     move_snap(32,32)
-                    set_stat_level(1)
+                    set_stat_level(level)
                     cell_x = floor(x/32)
                     cell_y = floor(y/32)
                 }
@@ -172,7 +211,7 @@ if random(100) &gt; 90 {
                 var new_enemy = instance_create(player.x,player.y - (player.range + 1)*32,obj_enemy)
                 with new_enemy {
                     move_snap(32,32)
-                    set_stat_level(1)
+                    set_stat_level(level)
                     cell_x = floor(x/32)
                     cell_y = floor(y/32)
                 }
@@ -183,7 +222,7 @@ if random(100) &gt; 90 {
                 var new_enemy = instance_create(player.x + (player.range + 1)*32,player.y,obj_enemy)
                 with new_enemy {
                     move_snap(32,32)
-                    set_stat_level(1)
+                    set_stat_level(level)
                     cell_x = floor(x/32)
                     cell_y = floor(y/32)
                 }
@@ -191,7 +230,7 @@ if random(100) &gt; 90 {
                 new_enemy = instance_create(player.x - (player.range + 1) *32,player.y,obj_enemy)
                 with new_enemy {
                     move_snap(32,32)
-                    set_stat_level(1)
+                    set_stat_level(level)
                     cell_x = floor(x/32)
                     cell_y = floor(y/32)
                 }
@@ -202,7 +241,7 @@ if random(100) &gt; 90 {
                 var new_enemy = instance_create(player.x,player.y + (player.range + 1)*32,obj_enemy)
                 with new_enemy {
                     move_snap(32,32)
-                    set_stat_level(1)
+                    set_stat_level(level)
                     cell_x = floor(x/32)
                     cell_y = floor(y/32)
                 }
@@ -210,7 +249,7 @@ if random(100) &gt; 90 {
                 new_enemy = instance_create(player.x,player.y - (player.range + 1)*32,obj_enemy)
                 with new_enemy {
                     move_snap(32,32)
-                    set_stat_level(1)
+                    set_stat_level(level)
                     cell_x = floor(x/32)
                     cell_y = floor(y/32)
                 }
@@ -316,6 +355,81 @@ var player = instance_find(obj_player,0)
 
 with obj_GUI {
     btn_loot_visible = (tile_get_background(tile_layer_find(1000000,player.cell_x*32,player.cell_y*32)) == bgd_city) and !ds_grid_get(looted,player.cell_x,player.cell_y)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Increment turn count
+global.turn_count++
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check if player lost
+
+if obj_player.hp &lt;= 0 {
+    global.lose = true
+    instance_destroy(obj_player)
+    instance_destroy(obj_enemy)
+    instance_destroy(obj_blue_zone)
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check if player win
+
+if global.players_remaining &lt;= 1 {
+    global.win = true
 }
 </string>
           </argument>

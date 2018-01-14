@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///Initialize variables
+shrink_nbr = 0
 atk = 1
 waiting_turn = 5
 previous_radius = floor(max(room_width,room_height)*(3/5))
@@ -73,7 +74,7 @@ if global.blue_zone_turn {
             current_radius = targeted_radius
             previous_radius = current_radius
             targeted_radius = floor(previous_radius*(4/5))
-            
+            shrink_nbr++
             waiting_turn = 5
         }
     }

@@ -15,7 +15,10 @@ global.player_turn = false
 global.enemy_turn = false
 global.blue_zone_turn = false
 global.players_remaining = 30
-random_set_seed(current_second)</code>
+random_set_seed(current_second)
+global.turn_count = 0
+global.win = false
+global.lose = false</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

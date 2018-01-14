@@ -257,6 +257,42 @@ if mouse_check_button(mb_left) {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Check if restart
+
+if (global.win or global.lose) and keyboard_check(ord('R')) {
+    instance_destroy(obj_player)
+    instance_destroy(obj_enemy)
+    instance_destroy(obj_blue_zone)
+    instance_create(-2,-2,obj_player)
+    instance_create(-3,-3,obj_blue_zone)
+    ds_grid_clear(looted,false)
+    btn_loot_visible = false
+    btn_attack_visible = false
+    global.win = false
+    global.lose = false
+    global.turn_count = 0
+    global.players_remaining = 30
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="8" enumb="64">
       <action>
@@ -371,11 +407,14 @@ if btn_attack_visible {
             <string>///Draw player wish
 
 var player = instance_find(obj_player,0)
-
-if player.wish_action != "None" {
-    draw_set_color(c_black)
-    draw_text(btn_end_turn_x + 10, btn_end_turn_y - 25, player.wish_action)
-
+if instance_exists(player) {
+    if player.wish_action != "None" {
+        draw_set_color(c_gray)
+        draw_rectangle(btn_end_turn_x + 5,btn_end_turn_y - 30,btn_end_turn_x + 60,btn_end_turn_y - 5,false)
+        draw_set_color(c_white)
+        draw_text(btn_end_turn_x + 10, btn_end_turn_y - 25, player.wish_action)
+    
+    }
 }
 </string>
           </argument>
@@ -400,13 +439,14 @@ if player.wish_action != "None" {
             <string>///Draw player statistics
 
 var player = instance_find(obj_player,0)
-
-var text_to_display = "Hp: " + string(player.hp) + "#Atk: " + string(player.atk) + "#Mov: " + string(player.mov) + "#Range: " + string(player.range) + "#Level: " + string(player.level)
-
-draw_set_color(c_gray)
-draw_rectangle(5,view_hport[0] - 105,105,view_hport[0] - 5,false)
-draw_set_color(c_white)
-draw_text_ext(10,view_hport[0] - 100,text_to_display,20,100)
+if instance_exists(player) {
+    var text_to_display = "Hp: " + string(player.hp) + "#Atk: " + string(player.atk) + "#Mov: " + string(player.mov) + "#Range: " + string(player.range) + "#Level: " + string(player.level)
+    
+    draw_set_color(c_gray)
+    draw_rectangle(5,view_hport[0] - 105,105,view_hport[0] - 5,false)
+    draw_set_color(c_white)
+    draw_text_ext(10,view_hport[0] - 100,text_to_display,20,100)
+}
 </string>
           </argument>
         </arguments>
@@ -453,10 +493,50 @@ draw_text(view_wport[0]-105,15,string(global.players_remaining) + " alive")
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Draw shrinking in...
+            <string>///Draw shrinking in X
 
 draw_set_color(c_white)
-draw_text(500,500,"Shrinking in: " + string(obj_blue_zone.waiting_turn))
+if instance_exists(obj_blue_zone) {
+    if obj_blue_zone.waiting_turn &gt; 0 {
+        draw_text(500,500,"Shrinking in: " + string(obj_blue_zone.waiting_turn))
+    }
+    else {
+        draw_text(500,500,"Shrinking now!")
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw according message if win or lose
+if global.win {
+    draw_set_color(c_gray)
+    draw_rectangle(floor(view_wport[0]/2)-35,floor(view_hport[0]/2)-25,floor(view_wport[0]/2)+335,floor(view_hport[0]/2)+25,false)
+    draw_set_color($37cce0)
+    draw_text(floor(view_wport[0]/2)-30,floor(view_hport[0]/2)-20,"Gagnant gagnant poulet repas")
+}
+else if global.lose {
+    draw_set_color(c_gray)
+    draw_rectangle(floor(view_wport[0]/2)-35,floor(view_hport[0]/2)-25,floor(view_wport[0]/2)+335,floor(view_hport[0]/2)+25,false)
+    draw_set_color($37cce0)
+    draw_text(floor(view_wport[0]/2)-30,floor(view_hport[0]/2)-20,"YOU DED, Press R to try again")
+}
 </string>
           </argument>
         </arguments>
