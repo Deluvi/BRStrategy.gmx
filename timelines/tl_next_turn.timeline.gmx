@@ -142,6 +142,10 @@ if (global.turn_count%3) == 0 {
     else to_remove = 0
 }
 global.players_remaining = global.players_remaining - to_remove
+var i
+for (i = 0; i &lt; to_remove;i++) {
+    add_kill_feed_entry()
+}
 </string>
           </argument>
         </arguments>

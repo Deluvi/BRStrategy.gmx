@@ -23,6 +23,7 @@
     </scripts>
     <script>scripts\spawn_enemy_level.gml</script>
     <script>scripts\set_stat_level.gml</script>
+    <script>scripts\add_kill_feed_entry.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_standard</font>
@@ -30,8 +31,8 @@
   <objects name="objects">
     <object>objects\obj_player</object>
     <object>objects\obj_dude</object>
-    <object>objects\obj_enemy</object>
     <object>objects\obj_GUI</object>
+    <object>objects\obj_enemy</object>
     <object>objects\obj_blue_zone</object>
   </objects>
   <timelines name="timelines">

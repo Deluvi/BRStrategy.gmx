@@ -145,6 +145,29 @@ ds_grid_clear(looted,false)
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Initialize kill feed
+kill_feed = ds_list_create()
+ds_list_clear(kill_feed)
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="3" enumb="0">
       <action>
@@ -537,9 +560,37 @@ else if global.win {
     draw_set_color(c_gray)
     draw_rectangle(floor(view_wport[0]/2)-35,floor(view_hport[0]/2)-25,floor(view_wport[0]/2)+335,floor(view_hport[0]/2)+25,false)
     draw_set_color($37cce0)
-    draw_text(floor(view_wport[0]/2)-30,floor(view_hport[0]/2)-20,"Gagnant gagnant poulet repas")
+    draw_text(floor(view_wport[0]/2)-30,floor(view_hport[0]/2)-20,"Gagnant gagnant poulet repas, Press R")
 }
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Draw kill feed list
+
+if !ds_list_empty(kill_feed) {
+    var i
+    for (i = 0; i &lt; ds_list_size(kill_feed);i++) {
+        draw_text(10,10+(20*i),ds_list_find_value(kill_feed,i))
+    }
+}
 </string>
           </argument>
         </arguments>

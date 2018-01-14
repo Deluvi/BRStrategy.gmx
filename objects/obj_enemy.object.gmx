@@ -65,6 +65,7 @@ wish_action = "None"
             <kind>1</kind>
             <string>///Decrease players remaining counter
 global.players_remaining--
+add_kill_feed_entry()
 </string>
           </argument>
         </arguments>
